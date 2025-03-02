@@ -1,6 +1,13 @@
+
 # BidRealm
 
 BidRealm is a real-time auction platform built with modern web technologies.
+
+
+
+https://github.com/user-attachments/assets/7d8cb7e4-a924-4222-9042-cbdb16295aae
+
+
 
 ## Architecture Overview
 <img width="871" alt="BidRealm Arch" src="https://github.com/user-attachments/assets/58554537-48f1-453a-a895-9fa07cb2c72a">
