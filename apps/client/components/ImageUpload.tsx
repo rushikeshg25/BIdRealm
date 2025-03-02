@@ -14,16 +14,16 @@ interface ImageUploadProps {
 export default function ImageUpload({ ImageURL }: ImageUploadProps) {
   const [imgUrl, setImgUrl] = useState<string>("");
   return (
-    <div className='w-fit '>
+    <div className="w-fit ">
       {imgUrl.length > 0 ? (
         <Suspense fallback={<div>Loading...</div>}>
-          <div className='relative'>
+          <div className="relative">
             <X
-              className='absolute  -top-2 -right-2 cursor-pointer z-10  dark:bg-black bg-white font-bold dark:text-white size-6 rounded-full dark:border-white border-black border-2'
+              className="absolute  -top-2 -right-2 cursor-pointer z-10  dark:bg-black bg-white font-bold dark:text-white size-6 rounded-full dark:border-white border-black border-2"
               onClick={() => setImgUrl("")}
             />
             <Image
-              alt='Uploaded image'
+              alt="Uploaded image"
               src={imgUrl}
               width={300}
               height={300}
@@ -32,15 +32,18 @@ export default function ImageUpload({ ImageURL }: ImageUploadProps) {
         </Suspense>
       ) : (
         <UploadDropzone<OurFileRouter, "imageUploader">
-          className='dark:text-white ut-label:dark:text-white  ut-label:text-black dark:border-dashed dark:border-border ut-button:bg-primary ut-button:dark:bg-primary ut-button:dark:text-black ut-button:hover:cursor-pointer
-'
-          endpoint='imageUploader'
+          className="dark:text-white ut-label:dark:text-white  ut-label:text-black dark:border-dashed dark:border-border ut-button:bg-primary ut-button:dark:bg-primary ut-button:dark:text-black ut-button:hover:cursor-pointer
+"
+          endpoint="imageUploader"
           onClientUploadComplete={(res) => {
-            setImgUrl(res[0]?.url as string);
-            ImageURL(res[0]?.url as string);
-            toast.success("Image uploaded!");
+            if (res && res[0]?.url) {
+              setImgUrl(res[0].url);
+              ImageURL(res[0].url);
+              toast.success("Image uploaded!");
+            }
           }}
           onUploadError={(error: Error) => {
+            console.error("Upload error:", error);
             toast.error("Error uploading image! Try again.");
           }}
         />
